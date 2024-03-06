@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
+</head>
+
+<body>
+  <script>
+    /* global nn */
+
+    const keyframes = `
+        @keyframes fade-in {
+          from {
+            opacity: 0.4;
+            transform: translateX(-200px);
+          }
+          to {
+            opacity: 0.9;
+            transform: translateY();
+          }
+        }
+      
+    @keyframes staggered-pop-up {
+      from {
+        opacity: 0.4;
+        transform: translateX(-200px);
+      }
+      to {
+        opacity: 0.9;
+        transform: translateY(10);
+      }
+    }
+`;
+
+    // Create a style element and append it to the document head
+  
+    
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = keyframes;
+    document.head.appendChild(styleElement);
+
+    const gifURL1 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring1.gif'
+    const gifURL2 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring2.gif'
+    const gifURL3 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring3.gif'
+    const gifURL4 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring4.gif'
+    const gifURL5 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring5.gif'
+    const gifURL6 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring6.gif'
+    const gifURL7 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring7.gif'
+    const gifURL8 = 'https://raw.githubusercontent.com/swnjama/spring/main/spring8.gif'
+
+    const bgColor = 'hsl(196, 99%, 86%)'
+
+    function createGif(x, y, w, h, url, animationDelay) {
+      nn.create('img')
+        .set({
+          src: url
+        })
+        .css({
+          position: 'absolute',
+          width: `${w}px`,
+          height: `${h}px`,
+          left: `${x}px`,
+          top: `${y}px`,
+          animation: `fade-in 0.3s ${animationDelay}s both, staggered-pop-up 0.4s ${animationDelay}s both`
+        
+        })
+        .addTo('body');
+    }
+
+    async function setup() {
+      nn.get('body').css({
+        'background-color': bgColor,
+        'overflow': 'hidden'
+      })
+
+      const gif = await nn.loadImage(gifURL1)
+      const gif2 = await nn.loadImage(gifURL2)
+      const gif3 = await nn.loadImage(gifURL3)
+      const gif4 = await nn.loadImage(gifURL4)
+      const gif5 = await nn.loadImage(gifURL5)
+      const gif6 = await nn.loadImage(gifURL6)
+      const gif7 = await nn.loadImage(gifURL7)
+      const gif8 = await nn.loadImage(gifURL8)
+
+      const cellWidth = gif.width / 4
+      const cellHeight = gif.height /4
+
+      const cellWidth2 = gif2.width / 4;
+      const cellHeight2 = gif2.height / 4;
+
+      const cellWidth3 = gif3.width / 4;
+      const cellHeight3 = gif3.height / 4;
+
+      const cellWidth4 = gif4.width / 4;
+      const cellHeight4 = gif4.height / 4;
+
+      const cellWidth5 = gif5.width / 4;
+      const cellHeight5 = gif5.height / 4;
+
+      const cellWidth6 = gif6.width / 4;
+      const cellHeight6 = gif6.height / 4;
+
+      const cellWidth7 = gif7.width / 4;
+      const cellHeight7 = gif7.height / 4;
+
+      const cellWidth8 = gif8.width / 4;
+      const cellHeight8 = gif8.height / 4;
+
+      const numColumns = nn.width / cellWidth2
+      const numRows = (nn.height / cellHeight2) 
+
+      function setupAnimation() {
+        for (let r = 0; r < numRows; r++) {
+          for (let c = 0; c < numColumns; c++) {
+            const x = c * cellWidth;
+            const y = r * cellHeight;
+
+            // Randomly choose whether to display the first or second image
+            const useFirstImage = Math.random() < 0.125; // 1/8 probability
+            const useSecondImage = Math.random() < 0.25; // 2/8 probability
+            const useThirdImage = Math.random() < 0.375; // 3/8 probability
+            const useFourthImage = Math.random() < 0.5; // 4/8 probability
+            const useFifthImage = Math.random() < 0.625; // 5/8 probability
+            const useSixthImage = Math.random() < 0.75; // 6/8 probability
+            const useSeventhImage = Math.random() < 0.875; // 7/8 probability
+            const useEighthImage = Math.random() < 1.0; // 8/8 probability
+            const animationDelay = r * 0.2;
+
+            if (useFirstImage) {
+              createGif(x, y, cellWidth, cellHeight, gifURL1, animationDelay);
+            } else if (useSecondImage) {
+              createGif(x, y, cellWidth2, cellHeight2, gifURL2, animationDelay);
+            } else if (useThirdImage) {
+              createGif(x, y, cellWidth3, cellHeight3, gifURL3, );
+            } else if (useFourthImage) {
+              createGif(x, y, cellWidth4, cellHeight4, gifURL4, animationDelay );
+            } else if (useFifthImage) {
+              createGif(x, y, cellWidth5, cellHeight5, gifURL5, animationDelay);
+            } else if (useSixthImage) {
+              createGif(x, y, cellWidth6, cellHeight6, gifURL6, animationDelay);
+            } else if (useSeventhImage) {
+              createGif(x, y, cellWidth7, cellHeight7, gifURL7,animationDelay );
+            } else {
+              createGif(x, y, cellWidth8, cellHeight8, gifURL8, animationDelay);
+            }
+          }
+        }
+      }
+
+      setupAnimation();
+    }
+    nn.on('load', setup);
+    
+    
+    
+    
+    
+
+            
+      
+  </script>
+</body>
+
+</html>
+
+
